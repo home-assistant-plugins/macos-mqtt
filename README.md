@@ -2,7 +2,7 @@
 
 A tiny macOS menu-bar app that turns your Mac into an MQTT device that
 **Home Assistant auto-discovers** (MQTT Discovery). No Bun/Node/Python — just a
-single native, Developer-ID-signed `.app`.
+native, Developer-ID-signed `.app` builds for Apple Silicon and Intel Macs.
 
 ## Features
 
@@ -65,8 +65,8 @@ records every command received from the server.
 
 ## Install
 
-1. Download `MQTT-Bridge-x.y.z.dmg` from [Releases](../../releases), open it and drag
-   **MQTT Bridge.app** into `Applications`.
+1. Download the Apple Silicon or Intel Macs DMG from [Releases](../../releases), open
+   it and drag the included app into `Applications`.
 2. Open it — an icon appears in the **menu bar**.
 3. Click it → **MQTT Settings…**, enter broker host/port/user/password, set a
    *Node ID* → **Save & reconnect**.
@@ -84,15 +84,17 @@ Needs Command Line Tools (`swift`), **no full Xcode required**.
 # regenerate the icon (optional)
 scripts/make_icon.sh
 
-# build + sign (Developer ID) → produces a signed .dmg
+# build + sign (Developer ID) → produces signed .app bundles and .dmgs for both architectures
 SIGN_ID="Developer ID Application: YOUR NAME (TEAMID)" scripts/build.sh 2.1.0
 
-# notarize the dmg for distribution (needs an app-specific password)
+# notarize both dmgs for distribution (needs an app-specific password)
 APPLE_ID="you@example.com" TEAM_ID="TEAMID" APP_PASSWORD="xxxx-xxxx-xxxx-xxxx" \
     scripts/notarize.sh 2.1.0
 ```
 
-Outputs `dist/MQTT Bridge.app` and `dist/MQTT-Bridge-2.1.0.dmg`.
+Outputs `dist/MQTT Bridge.app` and `dist/MQTT Bridge (Intel Macs).app`, plus
+`dist/MQTT-Bridge-2.1.0-Apple-Silicon.dmg` and
+`dist/MQTT-Bridge-2.1.0-Intel-Macs.dmg`.
 
 ## Architecture
 
